@@ -24,7 +24,6 @@ const formSchema = z.object({
 
 export default function LoginForm({
   className,
-  ...props
 }: React.ComponentProps<'form'>) {
   const navigate = useNavigate()
 
