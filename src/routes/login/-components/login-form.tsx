@@ -1,9 +1,17 @@
 import { z } from 'zod'
-import { Link, useNavigate } from '@tanstack/react-router'
+import { useNavigate } from '@tanstack/react-router'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { authClient } from '@/lib/auth-client'
 import { useAppForm } from '@/hooks/use-app-form'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { FieldGroup } from '@/components/ui/field'
 
 const formSchema = z.object({
   email: z.string().email({
@@ -14,7 +22,7 @@ const formSchema = z.object({
   }),
 })
 
-export function LoginForm({
+export default function LoginForm({
   className,
   ...props
 }: React.ComponentProps<'form'>) {
@@ -57,40 +65,44 @@ export function LoginForm({
   })
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        form.handleSubmit()
-      }}
-      className={cn('flex flex-col gap-6', className)}
-      {...props}
-    >
-      <fieldset>
-        <div className="flex flex-col items-center gap-1 text-center">
-          <h1 className="text-2xl font-bold">Login to your account</h1>
-          <p className="text-muted-foreground text-sm text-balance">
+    <div className={cn('flex flex-col gap-6', className)}>
+      <Card>
+        <CardHeader>
+          <CardTitle>Login to your account</CardTitle>
+          <CardDescription>
             Enter your email below to login to your account
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 mt-8">
-          <form.AppField name="email">
-            {(field) => <field.TextField label="Email" />}
-          </form.AppField>
-          <form.AppField name="password">
-            {(field) => <field.TextField label="Password" type="password" />}
-          </form.AppField>
-          <form.AppForm>
-            <form.SubscribeButton label="Login" className="w-full" />
-          </form.AppForm>
-        </div>
-        <div className="text-center text-sm mt-6">
-          Don&apos;t have an account?{' '}
-          {/* <Link to="/register" className="underline underline-offset-4">
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              form.handleSubmit()
+            }}
+          >
+            <FieldGroup className="">
+              <form.AppField name="email">
+                {(field) => <field.InputField label="Email" />}
+              </form.AppField>
+              <form.AppField name="password">
+                {(field) => (
+                  <field.InputField label="Password" type="password" />
+                )}
+              </form.AppField>
+              <form.AppForm>
+                <form.SubscribeButton label="Login" className="w-full" />
+              </form.AppForm>
+            </FieldGroup>
+            <div className="text-center text-sm mt-6">
+              Don&apos;t have an account?{' '}
+              {/* <Link to="/register" className="underline underline-offset-4">
             Register
           </Link> */}
-        </div>
-      </fieldset>
-    </form>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
   )
 }
