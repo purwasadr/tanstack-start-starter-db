@@ -29,7 +29,7 @@ src/
 ├── fn/                  # Server functions (TanStack Start createServerFn)
 ├── hooks/               # Custom React hooks
 ├── lib/                 # Core utilities (auth, utils, errors)
-├── middleware/          # Request and function middleware
+├── middlewares/          # Request and function middleware
 │   ├── fn/              # Server function middleware
 │   └── request/         # HTTP request middleware
 ├── routes/              # File-based routing (TanStack Router)
