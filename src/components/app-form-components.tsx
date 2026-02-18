@@ -1,5 +1,6 @@
 import { useStore } from '@tanstack/react-form'
 
+import { useId } from 'react'
 import { useFieldContext, useFormContext } from '../hooks/use-app-form'
 
 import { Field, FieldError, FieldLabel } from './ui/field'
@@ -7,8 +8,6 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea as ShadcnTextarea } from '@/components/ui/textarea'
 import * as ShadcnSelect from '@/components/ui/select'
-import { Switch as ShadcnSwitch } from '@/components/ui/switch'
-import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
 
 export function SubscribeButton({
@@ -36,25 +35,6 @@ export function SubscribeButton({
   )
 }
 
-function ErrorMessages({
-  errors,
-}: {
-  errors: Array<string | { message: string }>
-}) {
-  return (
-    <>
-      {errors.map((error) => (
-        <div
-          key={typeof error === 'string' ? error : error.message}
-          className="text-red-500 mt-1 text-sm"
-        >
-          {typeof error === 'string' ? error : error.message}
-        </div>
-      ))}
-    </>
-  )
-}
-
 export function InputField({
   label,
   className,
@@ -64,16 +44,17 @@ export function InputField({
 }) {
   const field = useFieldContext<string>()
   const errors = useStore(field.store, (state) => state.meta.errors)
+  const fieldId = useId()
 
   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
 
   return (
     <Field data-invalid={isInvalid} className={cn(className)}>
-      <FieldLabel htmlFor={field.name} className="mb-2">
+      <FieldLabel htmlFor={fieldId}>
         {label}
       </FieldLabel>
       <Input
-        id={field.name}
+        id={fieldId}
         name={field.name}
         value={field.state.value}
         onBlur={field.handleBlur}
@@ -86,7 +67,7 @@ export function InputField({
   )
 }
 
-export function TextArea({
+export function TextAreaField({
   label,
   ...props
 }: {
@@ -94,16 +75,17 @@ export function TextArea({
 } & React.ComponentProps<'textarea'>) {
   const field = useFieldContext<string>()
   const errors = useStore(field.store, (state) => state.meta.errors)
+  const fieldId = useId()
 
   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
 
   return (
     <Field data-invalid={isInvalid}>
-      <FieldLabel htmlFor={field.name} className="mb-2">
+      <FieldLabel htmlFor={fieldId} className="mb-2">
         {label}
       </FieldLabel>
       <ShadcnTextarea
-        id={field.name}
+        id={fieldId}
         name={field.name}
         value={field.state.value}
         onBlur={field.handleBlur}
@@ -116,7 +98,7 @@ export function TextArea({
   )
 }
 
-export function Select({
+export function SelectField({
   label,
   options,
   className,
@@ -127,16 +109,17 @@ export function Select({
 }) {
   const field = useFieldContext<string>()
   const errors = useStore(field.store, (state) => state.meta.errors)
+  const fieldId = useId()
 
   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
 
   return (
     <Field className={cn(className)}>
-      <FieldLabel htmlFor={field.name} className="mb-2">
+      <FieldLabel htmlFor={fieldId}>
         {label}
       </FieldLabel>
       <ShadcnSelect.Select
-        id={field.name}
+        id={fieldId}
         name={field.name}
         value={field.state.value}
         onValueChange={(value) => field.handleChange(value ?? '')}
@@ -158,25 +141,5 @@ export function Select({
       </ShadcnSelect.Select>
       {isInvalid && <FieldError errors={errors} />}
     </Field>
-  )
-}
-
-export function Switch({ label }: { label: string }) {
-  const field = useFieldContext<boolean>()
-  const errors = useStore(field.store, (state) => state.meta.errors)
-
-  return (
-    <div>
-      <div className="flex items-center gap-2">
-        <ShadcnSwitch
-          id={label}
-          onBlur={field.handleBlur}
-          checked={field.state.value}
-          onCheckedChange={(checked) => field.handleChange(checked)}
-        />
-        <Label htmlFor={label}>{label}</Label>
-      </div>
-      {field.state.meta.isTouched && <ErrorMessages errors={errors} />}
-    </div>
   )
 }
