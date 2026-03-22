@@ -11,12 +11,14 @@ export const errorFnMiddleware = createMiddleware({ type: 'function' }).server(
       if (isRedirect(error) || isNotFound(error)) {
         throw error
       }
+
+      // Log unexpected errors for debugging
+      console.error('Unexpected server function error:', error)
+
       // Re-throw our custom ServerFnError
       if (error instanceof ServerFnError) {
         throw error
       }
-      // Log unexpected errors for debugging
-      console.error('Unexpected server function error:', error)
       // Convert unknown errors to ServerFnError
       throw new ServerFnError('INTERNAL_ERROR', 'Internal server error', 500)
     }

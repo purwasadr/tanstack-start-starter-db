@@ -3,7 +3,7 @@ import { useNavigate } from '@tanstack/react-router'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { authClient } from '@/lib/auth-client'
-import { useAppForm } from '@/hooks/use-app-form'
+import { useAppForm } from '@/lib/form/app-form'
 import {
   Card,
   CardContent,

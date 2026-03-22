@@ -5,7 +5,7 @@ import {
   SelectField,
   SubscribeButton,
   TextAreaField,
-} from '@/components/app-form-components'
+} from './app-form-components'
 
 export const { fieldContext, useFieldContext, formContext, useFormContext } =
   createFormHookContexts()
@@ -13,7 +13,7 @@ export const { fieldContext, useFieldContext, formContext, useFormContext } =
 export const { useAppForm } = createFormHook({
   fieldComponents: {
     InputField,
-    Select: SelectField,
+    SelectField,
     TextAreaField,
   },
   formComponents: {
