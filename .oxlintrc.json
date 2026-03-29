@@ -1,0 +1,9 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  // Negated patterns from biome "files.includes" become "ignores"
+  "ignorePatterns": ["**/src/routeTree.gen.ts", "**/src/styles.css"],
+  "rules": {
+    "eslint/no-unused-vars": "error"
+  },
+  "plugins": ["eslint", "typescript", "unicorn", "react", "react-perf", "oxc", "import", "jest"]
+}
