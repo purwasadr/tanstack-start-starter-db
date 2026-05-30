@@ -4,7 +4,7 @@ import { getRequest } from '@tanstack/react-start/server'
 import { auth } from '@/lib/auth'
 import { ServerFnError } from '@/lib/server-fn-error'
 
-const authFnMiddleware = createMiddleware({ type: 'function' }).server(async ({ next }) => {
+export const authFnMiddleware = createMiddleware({ type: 'function' }).server(async ({ next }) => {
   const session = await auth.api.getSession({ headers: getRequest().headers })
   if (!session) {
     throw new ServerFnError('UNAUTHORIZED', 'You are not authenticated')
@@ -15,5 +15,3 @@ const authFnMiddleware = createMiddleware({ type: 'function' }).server(async ({ 
     },
   })
 })
-
-export default authFnMiddleware
