@@ -8,6 +8,10 @@ import * as authSchema from '@/db/schema/auth'
 import { hashPassword, verifyPassword } from './scrypt'
 
 export const auth = betterAuth({
+  baseURL: {
+    allowedHosts: ['localhost:*'],
+    protocol: process.env.NODE_ENV === 'development' ? 'http' : 'https',
+  },
   database: drizzleAdapter(db, {
     provider: 'pg',
     schema: authSchema,
