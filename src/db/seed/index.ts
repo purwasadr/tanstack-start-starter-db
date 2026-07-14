@@ -1,9 +1,9 @@
-import { reset } from 'drizzle-seed'
-import { nanoid } from 'nanoid'
-import { faker } from '@faker-js/faker'
-import { account, session, user, verification } from '../schema'
-import { hashPassword } from '@/lib/scrypt'
-import { db } from '@/db'
+import { reset } from 'drizzle-seed';
+import { nanoid } from 'nanoid';
+import { faker } from '@faker-js/faker';
+import { account, session, user, verification } from '../schema';
+import { hashPassword } from '@/lib/scrypt';
+import { db } from '@/db';
 
 const userData = [
   {
@@ -19,13 +19,13 @@ const userData = [
     email: 'hanni@purwasoft.com',
   },
   {
-    name: 'Minnie',
-    email: 'minnie@purwasoft.com',
+    name: 'Minji',
+    email: 'minji@purwasoft.com',
   },
-]
+];
 
 const main = async () => {
-  const userIds = Array.from({ length: 20 }, () => nanoid())
+  const userIds = Array.from({ length: 20 }, () => nanoid());
 
   try {
     // Reset the database before seeding to avoid unique constraint violations
@@ -34,7 +34,7 @@ const main = async () => {
       account,
       session,
       verification,
-    })
+    });
 
     // Seed users
     const users = userIds
@@ -51,8 +51,8 @@ const main = async () => {
           email: item.email,
           emailVerified: true,
         })),
-      )
-    const userRes = await db.insert(user).values(users).returning()
+      );
+    const userRes = await db.insert(user).values(users).returning();
 
     await db.insert(account).values(
       await Promise.all(
@@ -64,17 +64,17 @@ const main = async () => {
           password: await hashPassword('password'),
         })),
       ),
-    )
+    );
 
-    console.log('✅ Database seeded successfully')
+    console.log('✅ Database seeded successfully');
   } catch (error: unknown) {
     console.error(
       '❌ Error seeding database:',
       error instanceof Error ? error.message : String(error),
-    )
-    console.error(error)
-    process.exit(1)
+    );
+    console.error(error);
+    process.exit(1);
   }
-}
+};
 
-main()
+main();

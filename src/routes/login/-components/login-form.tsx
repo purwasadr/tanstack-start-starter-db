@@ -1,33 +1,32 @@
-import { z } from 'zod'
-import { useNavigate } from '@tanstack/react-router'
-import { toast } from 'sonner'
-import { cn } from '@/lib/utils'
-import { authClient } from '@/lib/auth-client'
-import { useAppForm } from '@/lib/form/app-form'
+import { z } from 'zod';
+import { useNavigate } from '@tanstack/react-router';
+import { toast } from 'sonner';
+import { cn } from '@/lib/utils';
+import { authClient } from '@/lib/auth-client';
+import { useAppForm } from '@/lib/form/app-form';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import { FieldGroup } from '@/components/ui/field'
+} from '@/components/ui/card';
 
 const formSchema = z.object({
-  email: z.string().email({
-    message: 'Invalid email address.',
-  }).min(1, {
-    message: 'Email is required.',
-  }),
+  email: z
+    .email({
+      message: 'Invalid email address.',
+    })
+    .min(1, {
+      message: 'Email is required.',
+    }),
   password: z.string().min(8, {
     message: 'Password is required.',
   }),
-})
+});
 
-export default function LoginForm({
-  className,
-}: React.ComponentProps<'form'>) {
-  const navigate = useNavigate()
+export default function LoginForm({ className }: React.ComponentProps<'form'>) {
+  const navigate = useNavigate();
 
   const form = useAppForm({
     defaultValues: {
@@ -45,25 +44,25 @@ export default function LoginForm({
               email: value.email,
               password: value.password,
               rememberMe: true,
-            })
+            });
             if (res.error) {
-              throw res.error
+              throw res.error;
             }
           },
           {
             loading: 'Logging in...',
             success: () => {
-              navigate({ to: '/', replace: true })
-              return 'Logged in successfully'
+              navigate({ to: '/', replace: true });
+              return 'Logged in successfully';
             },
             error: (error) => {
-              return error.message || 'Failed to login'
+              return error.message || 'Failed to login';
             },
           },
         )
-        .unwrap()
+        .unwrap();
     },
-  })
+  });
 
   return (
     <div className={cn('flex flex-col gap-6', className)}>
@@ -77,12 +76,12 @@ export default function LoginForm({
         <CardContent>
           <form
             onSubmit={(e) => {
-              e.preventDefault()
-              e.stopPropagation()
-              form.handleSubmit()
+              e.preventDefault();
+              e.stopPropagation();
+              form.handleSubmit();
             }}
           >
-            <FieldGroup className="">
+            <div className="">
               <form.AppField name="email">
                 {(field) => <field.InputField label="Email" />}
               </form.AppField>
@@ -94,7 +93,7 @@ export default function LoginForm({
               <form.AppForm>
                 <form.SubscribeButton label="Login" className="w-full" />
               </form.AppForm>
-            </FieldGroup>
+            </div>
             <div className="text-center text-sm mt-6">
               Don&apos;t have an account?{' '}
               {/* <Link to="/register" className="underline underline-offset-4">
@@ -105,5 +104,5 @@ export default function LoginForm({
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
