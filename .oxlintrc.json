@@ -7,5 +7,18 @@
     "react/no-children-prop": "off",
     "typescript/no-floating-promises": "off"
   },
-  "plugins": ["eslint", "typescript", "unicorn", "react", "react-perf", "oxc", "import", "jest"]
+  "options": {
+    "typeAware": true,
+    "typeCheck": true
+  },
+  "plugins": [
+    "eslint",
+    "typescript",
+    "unicorn",
+    "react",
+    "react-perf",
+    "oxc",
+    "import",
+    "jest"
+  ]
 }
