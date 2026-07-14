@@ -271,7 +271,6 @@ function FormExample() {
                       })
                     }
                   >
-                    <EyeIcon />
                     Show Sidebar
                   </MenuCheckboxItem>
                   <MenuCheckboxItem
@@ -283,7 +282,6 @@ function FormExample() {
                       })
                     }
                   >
-                    <LayoutIcon />
                     Show Status Bar
                   </MenuCheckboxItem>
                   <MenuSub>
@@ -295,18 +293,9 @@ function FormExample() {
                       <MenuGroup>
                         <MenuGroupLabel>Appearance</MenuGroupLabel>
                         <MenuRadioGroup value={theme} onValueChange={setTheme}>
-                          <MenuRadioItem value="light">
-                            <SunIcon />
-                            Light
-                          </MenuRadioItem>
-                          <MenuRadioItem value="dark">
-                            <MoonIcon />
-                            Dark
-                          </MenuRadioItem>
-                          <MenuRadioItem value="system">
-                            <MonitorIcon />
-                            System
-                          </MenuRadioItem>
+                          <MenuRadioItem value="light">Light</MenuRadioItem>
+                          <MenuRadioItem value="dark">Dark</MenuRadioItem>
+                          <MenuRadioItem value="system">System</MenuRadioItem>
                         </MenuRadioGroup>
                       </MenuGroup>
                     </MenuSubPopup>
@@ -359,7 +348,6 @@ function FormExample() {
                                   })
                                 }
                               >
-                                <BellIcon />
                                 Push Notifications
                               </MenuCheckboxItem>
                               <MenuCheckboxItem
@@ -371,7 +359,6 @@ function FormExample() {
                                   })
                                 }
                               >
-                                <MailIcon />
                                 Email Notifications
                               </MenuCheckboxItem>
                             </MenuGroup>
