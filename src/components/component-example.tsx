@@ -5,7 +5,6 @@ import {
   BluetoothIcon,
   CreditCardIcon,
   DownloadIcon,
-  EyeIcon,
   FileCodeIcon,
   FileIcon,
   FileTextIcon,
@@ -15,11 +14,7 @@ import {
   HelpCircleIcon,
   KeyboardIcon,
   LanguagesIcon,
-  LayoutIcon,
   LogOutIcon,
-  MailIcon,
-  MonitorIcon,
-  MoonIcon,
   MoreHorizontalIcon,
   MoreVerticalIcon,
   PaletteIcon,
@@ -27,7 +22,6 @@ import {
   SaveIcon,
   SettingsIcon,
   ShieldIcon,
-  SunIcon,
   UserIcon,
 } from 'lucide-react';
 import { Example, ExampleWrapper } from '@/components/example';

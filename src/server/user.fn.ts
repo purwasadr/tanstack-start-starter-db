@@ -1,10 +1,10 @@
-import { createServerFn } from '@tanstack/react-start'
-import { z } from 'zod'
+import { createServerFn } from '@tanstack/react-start';
+import { z } from 'zod';
 
-import { getUser } from './user.server'
+import { getUser } from './user.server';
 
 export const getUserFn = createServerFn({ method: 'GET' })
-  .inputValidator(
+  .validator(
     z.object({
       id: z.string(),
     }),
@@ -12,7 +12,7 @@ export const getUserFn = createServerFn({ method: 'GET' })
   .handler(async ({ data }) => {
     // Your server-side logic here
     // For example, you could fetch the user from a database
-    const user = await getUser(data.id)
+    const user = await getUser(data.id);
 
-    return user
-  })
+    return user;
+  });
