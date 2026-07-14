@@ -1,37 +1,35 @@
-'use client'
+import { useState } from 'react';
 
-import { useState } from 'react'
-
-import { Input } from '@/components/ui/input'
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { cn } from '@/lib/utils'
+} from '@/components/ui/select';
+import { cn } from '@/lib/utils';
 
 // -------------------------------------------------------------------------------------------------
 // Types
 // -------------------------------------------------------------------------------------------------
 
 /** Time unit options */
-type TimeUnit = 'seconds' | 'minutes' | 'hours'
+type TimeUnit = 'seconds' | 'minutes' | 'hours';
 
 export interface InputTimeProps {
   /** Value in total seconds */
-  value?: number
+  value?: number;
   /** Callback when value changes (value is always in seconds) */
-  onChange?: (seconds: number) => void
+  onChange?: (seconds: number) => void;
   /** Default unit to display (default: "seconds") */
-  defaultUnit?: TimeUnit | 'auto'
+  defaultUnit?: TimeUnit | 'auto';
   /** Whether the input is disabled */
-  disabled?: boolean
+  disabled?: boolean;
   /** Additional class name for the container */
-  className?: string
+  className?: string;
   /** Placeholder for the input */
-  placeholder?: string
+  placeholder?: string;
 }
 
 // -------------------------------------------------------------------------------------------------
@@ -43,14 +41,14 @@ const UNIT_TO_SECONDS: Record<TimeUnit, number> = {
   seconds: 1,
   minutes: 60,
   hours: 3600,
-}
+};
 
 /** Display labels for each unit */
 const UNIT_LABELS: Record<TimeUnit, string> = {
   seconds: 'Seconds',
   minutes: 'Minutes',
   hours: 'Hours',
-}
+};
 
 // -------------------------------------------------------------------------------------------------
 // Helper Functions
@@ -60,28 +58,28 @@ const UNIT_LABELS: Record<TimeUnit, string> = {
  * Converts seconds to the specified unit
  */
 function secondsToUnit(seconds: number, unit: TimeUnit): number {
-  return seconds / UNIT_TO_SECONDS[unit]
+  return seconds / UNIT_TO_SECONDS[unit];
 }
 
 /**
  * Converts a value in the specified unit to seconds
  */
 function unitToSeconds(value: number, unit: TimeUnit): number {
-  return value * UNIT_TO_SECONDS[unit]
+  return value * UNIT_TO_SECONDS[unit];
 }
 
 const getDefaultUnit = (value: number) => {
   if (value === 0) {
-    return 'minutes'
+    return 'minutes';
   }
   if (value % 3600 === 0) {
-    return 'hours'
+    return 'hours';
   } else if (value % 60 === 0) {
-    return 'minutes'
+    return 'minutes';
   } else {
-    return 'seconds'
+    return 'seconds';
   }
-}
+};
 
 // -------------------------------------------------------------------------------------------------
 // Component
@@ -112,34 +110,34 @@ export function InputTime({
   // Track the selected unit (user can switch between units)
   const [unit, setUnit] = useState<TimeUnit>(
     defaultUnit === 'auto' ? getDefaultUnit(value) : defaultUnit,
-  )
+  );
 
   // Convert the seconds value to display value based on current unit (rounded)
-  const displayValue = Math.round(secondsToUnit(value, unit))
+  const displayValue = Math.round(secondsToUnit(value, unit));
 
   /**
    * Handles input change.
    * Converts the input value to seconds and calls onChange.
    */
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value
+    const inputValue = e.target.value;
 
     // Allow empty input (treat as 0)
     if (inputValue === '') {
-      onChange?.(0)
-      return
+      onChange?.(0);
+      return;
     }
 
     // Parse the input as an integer (rounded)
-    const numValue = parseInt(inputValue, 10)
+    const numValue = parseInt(inputValue, 10);
 
     // Ignore invalid numbers
-    if (isNaN(numValue)) return
+    if (isNaN(numValue)) return;
 
     // Convert to seconds and call onChange
-    const seconds = unitToSeconds(numValue, unit)
-    onChange?.(Math.round(seconds)) // Round to avoid floating point issues
-  }
+    const seconds = unitToSeconds(numValue, unit);
+    onChange?.(Math.round(seconds)); // Round to avoid floating point issues
+  };
 
   /**
    * Handles unit change.
@@ -147,9 +145,9 @@ export function InputTime({
    */
   const handleUnitChange = (newUnit: TimeUnit | null) => {
     if (newUnit !== null) {
-      setUnit(newUnit)
+      setUnit(newUnit);
     }
-  }
+  };
 
   return (
     <div className={cn('flex items-center gap-2', className)}>
@@ -177,9 +175,9 @@ export function InputTime({
         </SelectContent>
       </Select>
     </div>
-  )
+  );
 }
 
 // Export helper functions for external use if needed
-export { secondsToUnit, unitToSeconds, UNIT_TO_SECONDS, UNIT_LABELS }
-export type { TimeUnit }
+export { secondsToUnit, unitToSeconds, UNIT_TO_SECONDS, UNIT_LABELS };
+export type { TimeUnit };
