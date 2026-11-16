@@ -1,4 +1,4 @@
-import { useStore } from '@tanstack/react-form'
+import { useSelector } from '@tanstack/react-form'
 
 import { useId } from 'react'
 import { useFieldContext, useFormContext } from './app-form'
@@ -43,7 +43,7 @@ export function InputField({
   label: string
 }) {
   const field = useFieldContext<string>()
-  const errors = useStore(field.store, (state) => state.meta.errors)
+  const errors = useSelector(field.store, (state) => state.meta.errors)
   const fieldId = useId()
 
   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
@@ -74,7 +74,7 @@ export function TextAreaField({
   label: string
 } & React.ComponentProps<'textarea'>) {
   const field = useFieldContext<string>()
-  const errors = useStore(field.store, (state) => state.meta.errors)
+  const errors = useSelector(field.store, (state) => state.meta.errors)
   const fieldId = useId()
 
   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
@@ -108,7 +108,7 @@ export function SelectField({
   className?: string
 }) {
   const field = useFieldContext<string>()
-  const errors = useStore(field.store, (state) => state.meta.errors)
+  const errors = useSelector(field.store, (state) => state.meta.errors)
   const fieldId = useId()
 
   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
