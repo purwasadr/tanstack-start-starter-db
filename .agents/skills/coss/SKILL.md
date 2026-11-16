@@ -1,6 +1,6 @@
 ---
 name: coss
-description: Helps implement coss UI components correctly. Use when building UIs with coss primitives (buttons, dialogs, selects, forms, menus, tabs, inputs, toasts, etc.), migrating from shadcn/Radix to coss/Base UI, composing trigger-based overlays, or troubleshooting coss component behavior. Covers imports, accessibility, Tailwind styling, and common pitfalls.
+description: Helps implement coss UI components correctly. Use when building UIs with coss primitives and patterns (buttons, dialogs, selects, forms, menus, tabs, segmented controls, inputs, toasts, etc.), migrating from shadcn/Radix to coss/Base UI, composing trigger-based overlays, or troubleshooting coss component behavior. Covers imports, accessibility, Tailwind styling, and common pitfalls.
 compatibility: Requires Tailwind CSS v4 and @base-ui/react. Designed for React projects using the coss component registry.
 license: MIT
 metadata:
@@ -23,9 +23,9 @@ Use this skill to:
 ## Source of truth
 
 - coss components docs: `apps/ui/content/docs/components/*.mdx`
-  - `https://github.com/cosscom/coss/tree/main/apps/ui/content/docs/components`
+  - `https://github.com/cosscom/ui/tree/main/apps/ui/content/docs/components`
 - coss particle examples: `apps/ui/registry/default/particles/p-*.tsx`
-  - `https://github.com/cosscom/coss/tree/main/apps/ui/registry/default/particles`
+  - `https://github.com/cosscom/ui/tree/main/apps/ui/registry/default/particles`
 - coss particles catalog: `https://coss.com/ui/particles`
 - docs map for agents: `https://coss.com/ui/llms.txt`
 
@@ -49,6 +49,7 @@ Always apply before returning coss code:
 
 - Do not invent coss APIs. Verify against component docs first.
 - For trigger-based primitives (Dialog, Menu, Select, Popover, Tooltip), follow each primitive's documented trigger/content hierarchy and composition API; do not mix patterns across components.
+- Use Drawer for edge panels on desktop and mobile. Sheet has been replaced by Drawer; do not introduce Sheet usage.
 - Preserve accessibility labels and error semantics.
 - Consult primitive-specific guides for component invariants and edge cases.
 - For manual install guidance, include all required dependencies and local component files referenced by imports.
@@ -64,7 +65,7 @@ Rule references (read on demand when the task touches these areas):
 
 ## Component discovery
 
-All 54 primitives have dedicated reference guides at `./references/primitives/<name>.md`. To find the right one for a task, consult the component registry index:
+All 55 primitives have dedicated reference guides at `./references/primitives/<name>.md`. To find the right one for a task, consult the component registry index:
 
 - `./references/component-registry.md`
 
@@ -104,7 +105,7 @@ High-risk primitives (read these guides first -- they have the most composition 
 - `./references/primitives/context-menu.md` — right-click/long-press menus at the pointer
 - `./references/primitives/select.md` — items-first pattern, multiple, object values, groups
 - `./references/primitives/form.md` — Field composition, validation, submission
-- `./references/primitives/input-group.md` — addons, DOM order invariant, textarea layouts
+- `./references/primitives/input-group.md` — input-first DOM convention, addon focus lookup, textarea layouts
 - `./references/primitives/toast.md` — toastManager (not Sonner), anchored toasts, providers
 
 ## Output Checklist
@@ -115,4 +116,3 @@ Before returning code:
 - composition structure is valid for selected primitive(s)
 - accessibility and explicit control types (`button`, `input`, etc.) are present
 - migration-sensitive flows are verified (type/lint, keyboard/a11y behavior, and SSR-sensitive primitives like Select/Command)
-

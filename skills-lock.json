@@ -1,17 +1,23 @@
 {
-  "version": 1,
+  "version": 2,
   "skills": {
     "coss": {
-      "source": "cosscom/coss",
+      "source": "cosscom/ui",
       "sourceType": "github",
       "skillPath": "apps/ui/skills/coss/SKILL.md",
-      "computedHash": "0166293d767b1e3129c321268ab52f34823c1e0976de0d738042288f968bff56"
+      "computedHash": "b8ce9e8aa0db086eaf21aee001726cb129f9927267b1bf6e1e688dfbb4fb9b6f"
+    },
+    "coss-particles": {
+      "source": "cosscom/ui",
+      "sourceType": "github",
+      "skillPath": "apps/ui/skills/coss-particles/SKILL.md",
+      "computedHash": "d8dc7fa3991fc7d62d7f47dc1535091388f33ee282915ba46d7bef517c80ecef"
     },
     "no-use-effect": {
       "source": "alejandrobailo/no-use-effect",
       "sourceType": "github",
       "skillPath": "SKILL.md",
-      "computedHash": "958a58f113dc70862f12c800e24fc34a6adf5742c05e613417afc8c8127ff57e"
+      "computedHash": "75d06f792cb51747d0f9923eb3732ed3b6a476b1c4a607103c8834275825f78a"
     }
   }
 }

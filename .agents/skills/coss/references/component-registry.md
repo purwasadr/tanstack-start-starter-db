@@ -7,7 +7,7 @@ For optional **`portalProps`** on composed `*Popup` components and **toast** pro
 ## Overlays & Popups
 - **Dialog** — Centered modal requiring user focus. `./references/primitives/dialog.md`
 - **AlertDialog** — Destructive/critical confirmation modal. `./references/primitives/alert-dialog.md`
-- **Sheet** — Side-panel overlay for settings/details. `./references/primitives/sheet.md`
+- **Sheet (legacy)** — Replaced by Drawer; do not use for new UI. Migration reference: `./references/primitives/sheet.md`
 - **Drawer** — Bottom/side drawer, often mobile-responsive. `./references/primitives/drawer.md`
 - **Popover** — Anchored non-modal floating content. `./references/primitives/popover.md`
 - **Tooltip** — Short hover/focus hint text. `./references/primitives/tooltip.md`
@@ -38,6 +38,7 @@ For optional **`portalProps`** on composed `*Popup` components and **toast** pro
 - **Checkbox** — Single boolean toggle. `./references/primitives/checkbox.md`
 - **CheckboxGroup** — Multiple-selection set. `./references/primitives/checkbox-group.md`
 - **RadioGroup** — Mutually exclusive single choice. `./references/primitives/radio-group.md`
+- **SegmentedControl** — Segmented presentation rendered over radio choices, navigation links, or exclusive toggles; choose semantics first. `./references/primitives/segmented-control.md`
 - **Switch** — Binary on/off preference toggle. `./references/primitives/switch.md`
 - **Toggle** — Pressable two-state command button. `./references/primitives/toggle.md`
 - **ToggleGroup** — Grouped pressed-state controls. `./references/primitives/toggle-group.md`
