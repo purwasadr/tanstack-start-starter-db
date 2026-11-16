@@ -1,20 +1,20 @@
-"use client";
+'use client'
 
-import { Field as FieldPrimitive } from "@base-ui/react/field";
-import type React from "react";
-import { cn } from "@/lib/utils";
+import type React from 'react'
 
-export function Field({
-  className,
-  ...props
-}: FieldPrimitive.Root.Props): React.ReactElement {
+import { Field as FieldPrimitive } from '@base-ui/react/field'
+import { useMemo } from 'react'
+
+import { cn } from '@/lib/utils'
+
+export function Field({ className, ...props }: FieldPrimitive.Root.Props): React.ReactElement {
   return (
     <FieldPrimitive.Root
-      className={cn("flex flex-col items-start gap-2", className)}
+      className={cn('flex flex-col items-start gap-2', className)}
       data-slot="field"
       {...props}
     />
-  );
+  )
 }
 
 export function FieldLabel({
@@ -24,26 +24,17 @@ export function FieldLabel({
   return (
     <FieldPrimitive.Label
       className={cn(
-        "inline-flex items-center gap-2 font-medium text-base/4.5 text-foreground data-disabled:opacity-64 sm:text-sm/4",
+        'inline-flex items-center gap-2 font-medium text-base/4.5 text-foreground data-disabled:opacity-64 sm:text-sm/4',
         className,
       )}
       data-slot="field-label"
       {...props}
     />
-  );
+  )
 }
 
-export function FieldItem({
-  className,
-  ...props
-}: FieldPrimitive.Item.Props): React.ReactElement {
-  return (
-    <FieldPrimitive.Item
-      className={cn("flex", className)}
-      data-slot="field-item"
-      {...props}
-    />
-  );
+export function FieldItem({ className, ...props }: FieldPrimitive.Item.Props): React.ReactElement {
+  return <FieldPrimitive.Item className={cn('flex', className)} data-slot="field-item" {...props} />
 }
 
 export function FieldDescription({
@@ -52,29 +43,52 @@ export function FieldDescription({
 }: FieldPrimitive.Description.Props): React.ReactElement {
   return (
     <FieldPrimitive.Description
-      className={cn("text-muted-foreground text-xs", className)}
+      className={cn('text-muted-foreground text-xs', className)}
       data-slot="field-description"
       {...props}
     />
-  );
+  )
 }
 
 export function FieldError({
   className,
+  errors,
   ...props
-}: FieldPrimitive.Error.Props): React.ReactElement {
+}: FieldPrimitive.Error.Props & {
+  errors?: Array<{ message?: string } | undefined>
+}) {
+  const content = useMemo(() => {
+    if (!errors?.length) {
+      return null
+    }
+    const uniqueErrors = [...new Map(errors.map((error) => [error?.message, error])).values()]
+
+    if (uniqueErrors?.length == 1) {
+      return uniqueErrors[0]?.message
+    }
+    return (
+      <ul className="ml-4 flex list-disc flex-col gap-1">
+        {uniqueErrors.map((error, index) => error?.message && <li key={index}>{error.message}</li>)}
+      </ul>
+    )
+  }, [errors])
+
+  if (!content) {
+    return null
+  }
+
   return (
     <FieldPrimitive.Error
-      className={cn("text-destructive-foreground text-xs", className)}
+      className={cn('text-destructive-foreground text-xs', className)}
       data-slot="field-error"
       {...props}
-    />
-  );
+    >
+      {content}
+    </FieldPrimitive.Error>
+  )
 }
 
-export const FieldControl: typeof FieldPrimitive.Control =
-  FieldPrimitive.Control;
-export const FieldValidity: typeof FieldPrimitive.Validity =
-  FieldPrimitive.Validity;
+export const FieldControl: typeof FieldPrimitive.Control = FieldPrimitive.Control
+export const FieldValidity: typeof FieldPrimitive.Validity = FieldPrimitive.Validity
 
-export { FieldPrimitive };
+export { FieldPrimitive }
